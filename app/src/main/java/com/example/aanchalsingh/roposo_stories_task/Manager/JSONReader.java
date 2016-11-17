@@ -1,8 +1,10 @@
 package com.example.aanchalsingh.roposo_stories_task.Manager;
 
+import android.app.Activity;
 import android.content.Context;
 import com.example.aanchalsingh.roposo_stories_task.NetworkModels.Story;
-import com.example.aanchalsingh.roposo_stories_task.NetworkModels.User;
+import com.example.aanchalsingh.roposo_stories_task.NetworkModels.Users;
+import com.example.aanchalsingh.roposo_stories_task.Utils.RealmController;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonParser;
@@ -18,7 +20,7 @@ import java.util.List;
 public class JSONReader {
 
     List<Story> storyList = new ArrayList<>();
-    List<User> userList = new ArrayList<>();
+    List<Users> userList = new ArrayList<>();
     String json;
     Context context;
 
@@ -50,12 +52,14 @@ public class JSONReader {
             Gson gson = new Gson();
             for(int i=0;i<2;i++)
             {
-                userList.add(gson.fromJson(array.get(i),User.class));
+                userList.add(gson.fromJson(array.get(i),Users.class));
             }
             for(int j=2;j<array.size();j++)
             {
                 storyList.add(gson.fromJson(array.get(j),Story.class));
             }
+
+            RealmController.with((Activity) context).addUsersToDB(userList);
             return storyList;
 
         } catch (IOException ex) {

@@ -2,6 +2,9 @@ package com.example.aanchalsingh.roposo_stories_task.Utils;
 
 import android.app.Activity;
 import android.app.Fragment;
+import com.example.aanchalsingh.roposo_stories_task.DatabaseModels.User;
+import com.example.aanchalsingh.roposo_stories_task.NetworkModels.Users;
+import java.util.List;
 import io.realm.Realm;
 
 /**
@@ -51,45 +54,54 @@ public class RealmController {
         return realm;
     }
 
-//    //check if flower already in db
-//    public boolean ifDbContainsData(int id) {
-//        if(realm.where(Flower.class).equalTo("id", id).findFirst()!=null) {
-//            return true;
-//        }
-//        return false;
-//    }
-//
-//    //add saved flower to db
-//    public void addFlowerToDb(final int id, final String name)
-//    {
-//        Flower flowerResult = realm.where(Flower.class).equalTo("id",id).findFirst();
-//        if(flowerResult==null)
-//        {
-//            realm.executeTransaction(new Realm.Transaction() {
-//                @Override
-//                public void execute(Realm realm) {
-//                    Flower flower = realm.createObject(Flower.class);
-//                    flower.setId(id);
-//                    flower.setName(name);
-//                }
-//            });
-//
-//
-//        }
-//
-//    }
-//
-//    // delete unsaved flower
-//    public void deleteFlowerData(int id) {
-//        final RealmResults<Flower> results = realm.where(Flower.class).equalTo("id", id).findAll();
-//        realm.executeTransaction(new Realm.Transaction() {
-//            @Override
-//            public void execute(Realm realm) {
-//                results.deleteAllFromRealm();
-//            }
-//        });
-//
-//    }
+    public void addUsersToDB(final List<Users> userList)
+    {
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
 
+                for(int i=0;i<userList.size();i++)
+                {
+                    final User user = realm.where(User.class).equalTo("id", userList.get(i).getId()).findFirst();
+                    if (user == null) {
+                        User newUser = realm.createObject(User.class);
+                        newUser.setId(userList.get(i).getId());
+                        newUser.setAbout(userList.get(i).getAbout());
+                        newUser.setIsFollowing(userList.get(i).isIsFollowing());
+                        newUser.setFollowers(userList.get(i).getFollowers());
+                        newUser.setFollowing(userList.get(i).getFollowing());
+                        newUser.setHandle(userList.get(i).getHandle());
+                        newUser.setImage(userList.get(i).getImage());
+                        newUser.setUrl(userList.get(i).getUrl());
+                        newUser.setUsername(userList.get(i).getUsername());
+                    }
+                }
+            }
+        });
+    }
 
+    //check if following this user
+    public boolean isFollowing(int id) {
+
+        User user = realm.where(User.class).equalTo("id", id).findFirst();
+        if(user!=null)
+        {
+            return (user.getIsFollowing());
+        }
+        return  false;
+    }
+
+    //set is following to true/false
+    public void updateIsFollowing(final int id, final boolean status) {
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                final User user = realm.where(User.class).equalTo("id", id).findFirst();
+                if (user != null) {
+                    user.setIsFollowing(status);
+                }
+            }
+        });
+    }
 }
+
