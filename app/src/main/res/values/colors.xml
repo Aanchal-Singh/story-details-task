@@ -3,7 +3,7 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="imageBackground">#e5e5e5</color>
+    <color name="cardBackground">#e5e5e5</color>
     <color name="splashBackground">#becce7</color>
     <color name="commonBackground">#07358c</color>
     <color name="titleTextColor">#ffffff</color>

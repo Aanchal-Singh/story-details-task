@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<RelativeLayout xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/cardBackground"
+    tools:ignore="MissingPrefix">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -10,12 +12,14 @@
         android:id="@+id/rl_titleBar"
         android:background="@color/commonBackground">
         <TextView
+            fontPath="fonts/Roboto-Bold.ttf"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Flowers"
+            android:text="ROPOSO"
             android:textSize="18sp"
             android:layout_centerInParent="true"
-            android:textColor="@color/titleTextColor"/>
+            android:textColor="@color/titleTextColor"
+             />
     </RelativeLayout>
 
     <TextView
@@ -32,7 +36,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/recycler_view"
-        android:layout_below="@+id/rl_titleBar">
+        android:layout_marginTop="4dp"
+        android:layout_below="@+id/rl_titleBar"
+        >
     </android.support.v7.widget.RecyclerView>
 
 </RelativeLayout>

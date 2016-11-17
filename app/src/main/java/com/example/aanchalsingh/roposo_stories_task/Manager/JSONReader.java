@@ -1,10 +1,10 @@
 package com.example.aanchalsingh.roposo_stories_task.Manager;
 
-import android.app.Activity;
 import android.content.Context;
+import com.example.aanchalsingh.roposo_stories_task.AppEvents.JsonParsedEvent;
 import com.example.aanchalsingh.roposo_stories_task.NetworkModels.Story;
 import com.example.aanchalsingh.roposo_stories_task.NetworkModels.Users;
-import com.example.aanchalsingh.roposo_stories_task.Utils.RealmController;
+import com.example.aanchalsingh.roposo_stories_task.Utils.SingletonBus;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonParser;
@@ -39,7 +39,7 @@ public class JSONReader {
     }
 
     // gets stories and saves users
-    public List<Story> parseJSONFromAsset() {
+    public void parseJSONFromAsset() {
         try {
             InputStream is = context.getAssets().open("jsonFile.json");
             int size = is.available();
@@ -58,13 +58,10 @@ public class JSONReader {
             {
                 storyList.add(gson.fromJson(array.get(j),Story.class));
             }
-
-            RealmController.with((Activity) context).addUsersToDB(userList);
-            return storyList;
-
+            SingletonBus.getBus().post(new JsonParsedEvent(storyList,userList));
         } catch (IOException ex) {
             ex.printStackTrace();
-            return null;
+            SingletonBus.getBus().post(null);
         }
     }
 

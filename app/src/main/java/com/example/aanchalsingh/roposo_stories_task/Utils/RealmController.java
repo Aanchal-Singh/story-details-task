@@ -81,7 +81,7 @@ public class RealmController {
     }
 
     //check if following this user
-    public boolean isFollowing(int id) {
+    public boolean isFollowing(String id) {
 
         User user = realm.where(User.class).equalTo("id", id).findFirst();
         if(user!=null)
@@ -92,7 +92,7 @@ public class RealmController {
     }
 
     //set is following to true/false
-    public void updateIsFollowing(final int id, final boolean status) {
+    public void updateIsFollowing(final String id, final boolean status) {
         realm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
@@ -102,6 +102,11 @@ public class RealmController {
                 }
             }
         });
+    }
+
+    public User getUserDetails(String id)
+    {
+        return realm.where(User.class).equalTo("id", id).findFirst();
     }
 }
 
