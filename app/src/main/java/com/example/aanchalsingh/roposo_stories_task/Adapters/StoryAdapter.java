@@ -7,6 +7,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,8 +68,8 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.MyViewHolder
 
         holder.userName.setText(user.getUsername());
         holder.userHandle.setText(user.getHandle());
-        holder.followers.setText(String.valueOf(user.getFollowers()));
-        holder.likes.setText(String.valueOf(storyData.getLikesCount()));
+        holder.followers.setText("Followed By : "+String.valueOf(user.getFollowers()));
+        holder.likes.setText("Likes : " + String.valueOf(storyData.getLikesCount()));
         Glide.with(context)
                 .load(storyData.getSi())
                 .asBitmap()
@@ -77,7 +78,7 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.MyViewHolder
                 .into(holder.storyImage);
         if(user.getIsFollowing())
         {
-            holder.follow.setTextColor(ContextCompat.getColor(context,R.color.titleTextColor));
+            holder.follow.setTextColor(ContextCompat.getColor(context,R.color.white));
         }else{
             holder.follow.setTextColor(ContextCompat.getColor(context,R.color.colorAccent));
         }
@@ -93,6 +94,8 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.MyViewHolder
 
     @Override
     public int getItemCount() {
+        Log.wtf("size",""+storyList.size()+"");
+
         return storyList.size();
     }
 
@@ -125,6 +128,7 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.MyViewHolder
     public void refreshView(List<Story> freshList)
     {
         storyList=new ArrayList<>();
+        storyList.clear();
         storyList.addAll(freshList);
         notifyDataSetChanged();
     }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
+<android.support.v7.widget.CardView xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -8,112 +8,153 @@
     android:layout_marginRight="6dp"
     android:layout_marginTop="4dp"
     android:layout_marginBottom="4dp"
-    app:cardCornerRadius="5dp">
+    app:cardCornerRadius="5dp"
+    tools:ignore="MissingPrefix" >
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/rl_user_view">
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:id="@+id/iv_user_image"
-                android:layout_margin="8dp"
-                android:scaleType="centerCrop"
-                android:layout_centerInParent="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"/>
-
-            <RelativeLayout
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:layout_toRightOf="@+id/iv_user_image"
-                android:layout_marginLeft="10dp"
-                android:layout_centerInParent="true">
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Story Title"
-                    android:textSize="12sp"
-                    android:id="@+id/tv_username" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="handel"
-                    android:id="@+id/tv_user_handle"
-                    android:layout_below="@+id/tv_username"
-                    android:layout_centerInParent="true"/>
-
-            </RelativeLayout>
+            android:id="@+id/story_view"
+            >
 
             <TextView
+                fontpath="fonts/Roboto-Bold.ttf"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentRight="true"
                 android:text="followers:25"
                 android:id="@+id/tv_followers"
-                android:layout_margin="8dp"
-                android:layout_centerInParent="true"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:alpha="0.54"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="16dp"
+                android:layout_below="@+id/tv_likes"
                 />
 
 
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/rl_user_view"
-            android:layout_marginTop="4dp"
-            >
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginBottom="4dp"
-                android:id="@+id/view_divider"/>
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/view_divider"
-                android:layout_centerInParent="true"
-                android:background="@null"
-                android:id="@+id/follow_btn"
-                android:text="FOLLOW"/>
 
             <ImageView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/view_divider"
-                android:layout_centerInParent="true"
-                android:id="@+id/iv_story_image"/>
+                android:layout_height="match_parent"
+                android:id="@+id/iv_story_image"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:background="@drawable/image_background"
+                android:layout_margin="4dp"
+                android:elevation="1dp"/>
             <TextView
+                fontpath="fonts/Roboto-Bold.ttf"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:alpha="0.87"
                 android:text="throwback"
-                android:layout_below="@id/iv_story_image"
-                android:layout_margin="10dp"
-                android:id="@+id/tv_story_title"/>
+                android:layout_marginTop="20dp"
+                android:id="@+id/tv_story_title"
+                android:layout_toLeftOf="@id/iv_story_image"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="16dp"
+                />
             <TextView
+                fontpath="fonts/Roboto-Bold.ttf"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="likes"
-                android:layout_alignParentRight="true"
-                android:layout_centerInParent="true"
-                android:layout_below="@id/iv_story_image"
-                android:layout_margin="10dp"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:alpha="0.54"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="16dp"
+                android:layout_below="@id/tv_story_title"
                 android:id="@+id/tv_likes"
                 />
 
         </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/rl_user_view"
+            android:layout_below="@+id/story_view"
+            android:layout_toRightOf="@+id/iv_user_image"
+            android:background="@android:color/transparent">
+
+
+            <RelativeLayout
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="16dp">
+
+                <TextView
+                    fontpath="fonts/Roboto-Bold.ttf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="username"
+                    android:textSize="14sp"
+                    android:id="@+id/tv_username"
+                    android:layout_centerHorizontal="true"
+                    android:textColor="@color/black"
+                    android:alpha="0.87"
+                    />
+
+                <TextView
+                    fontpath="fonts/Roboto-Bold.ttf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="handle"
+                    android:id="@+id/tv_user_handle"
+                    android:layout_below="@+id/tv_username"
+                    android:layout_centerInParent="true"
+                    android:textColor="@color/black"
+                    android:alpha="0.54"/>
+
+            </RelativeLayout>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:id="@+id/follow_btn"
+                android:text="FOLLOW"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="8dp"
+                android:minHeight="20dp"
+                android:textColor="@color/white"
+                android:background="@drawable/button_background"
+                android:layout_centerVertical="true"/>
+
+
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:id="@+id/view_divider"
+            android:background="@color/black"
+            android:alpha="0.1"
+            android:layout_below="@id/story_view"/>
+
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/iv_user_image"
+            android:scaleType="centerCrop"
+            android:layout_marginBottom="25dp"
+            android:layout_marginLeft="16dp"
+            android:layout_alignBottom="@+id/rl_user_view"
+            />
+
+
 
 
 
