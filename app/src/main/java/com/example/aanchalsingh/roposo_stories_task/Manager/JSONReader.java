@@ -1,15 +1,14 @@
 package com.example.aanchalsingh.roposo_stories_task.Manager;
 
 import android.content.Context;
-import android.util.Log;
-
 import com.example.aanchalsingh.roposo_stories_task.NetworkModels.Story;
+import com.example.aanchalsingh.roposo_stories_task.NetworkModels.User;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonParser;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -18,8 +17,9 @@ import java.util.List;
 
 public class JSONReader {
 
-    List<Story> storyList= new ArrayList<>();
-    String storiesData;
+    List<Story> storyList = new ArrayList<>();
+    List<User> userList = new ArrayList<>();
+    String json;
     Context context;
 
     private static JSONReader _instance;
@@ -36,17 +36,26 @@ public class JSONReader {
         return _instance;
     }
 
-    public List<Story> loadJSONFromAsset() {
+    // gets stories and saves users
+    public List<Story> parseJSONFromAsset() {
         try {
-            InputStream is = context.getAssets().open("stories.json");
+            InputStream is = context.getAssets().open("jsonFile.json");
             int size = is.available();
             byte[] buffer = new byte[size];
             is.read(buffer);
             is.close();
-            storiesData = new String(buffer, "UTF-8");
-            GsonBuilder gsonBuilder = new GsonBuilder();
-            Gson gson = gsonBuilder.create();
-            storyList= Arrays.asList(gson.fromJson(storiesData, Story[].class));
+            json = new String(buffer, "UTF-8");
+            JsonParser parser = new JsonParser();
+            JsonArray array = parser.parse(json).getAsJsonArray();
+            Gson gson = new Gson();
+            for(int i=0;i<2;i++)
+            {
+                userList.add(gson.fromJson(array.get(i),User.class));
+            }
+            for(int j=2;j<array.size();j++)
+            {
+                storyList.add(gson.fromJson(array.get(j),Story.class));
+            }
             return storyList;
 
         } catch (IOException ex) {
