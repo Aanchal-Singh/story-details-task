@@ -7,6 +7,7 @@ import android.support.v4.content.ContextCompat;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
@@ -48,7 +49,7 @@ public class StoriesActivity extends Activity {
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                window.setStatusBarColor(ContextCompat.getColor(this, R.color.commonBackground));
+                window.setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
             }
         }
         setContentView(R.layout.activity_stories);
@@ -77,7 +78,11 @@ public class StoriesActivity extends Activity {
     {
         if(jsonParsedEvent!=null) {
             RealmController.with(this).addUsersToDB(jsonParsedEvent.getUsersList());
-            storyAdapter.refreshView(jsonParsedEvent.getStoryList());
+            storyList = new ArrayList<>();
+            storyList.addAll(jsonParsedEvent.getStoryList());
+            storyAdapter.refreshView(storyList);
+
+
         } else {
             Toast.makeText(this,"Failed to parse data",Toast.LENGTH_LONG).show();
         }

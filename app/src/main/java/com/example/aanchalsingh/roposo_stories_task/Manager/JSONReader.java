@@ -19,8 +19,8 @@ import java.util.List;
 
 public class JSONReader {
 
-    List<Story> storyList = new ArrayList<>();
-    List<Users> userList = new ArrayList<>();
+    List<Story> storyList;
+    List<Users> userList;
     String json;
     Context context;
 
@@ -50,6 +50,8 @@ public class JSONReader {
             JsonParser parser = new JsonParser();
             JsonArray array = parser.parse(json).getAsJsonArray();
             Gson gson = new Gson();
+            userList = new ArrayList<>();
+            storyList= new ArrayList<>();
             for(int i=0;i<2;i++)
             {
                 userList.add(gson.fromJson(array.get(i),Users.class));

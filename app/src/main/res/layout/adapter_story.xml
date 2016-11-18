@@ -34,19 +34,24 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="16dp"
                 android:layout_below="@+id/tv_likes"
+                android:layout_marginBottom="35dp"
                 />
 
 
 
-            <ImageView
+            <com.example.aanchalsingh.roposo_stories_task.Utils.CustomAllroundedImageView
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:id="@+id/iv_story_image"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
+                android:adjustViewBounds="true"
+                android:cropToPadding="true"
                 android:background="@drawable/image_background"
                 android:layout_margin="4dp"
+                android:scaleType="centerCrop"
                 android:elevation="1dp"/>
+
             <TextView
                 fontpath="fonts/Roboto-Bold.ttf"
                 android:layout_width="wrap_content"
@@ -55,11 +60,12 @@
                 android:textColor="@color/black"
                 android:alpha="0.87"
                 android:text="throwback"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="16dp"
                 android:id="@+id/tv_story_title"
                 android:layout_toLeftOf="@id/iv_story_image"
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
                 />
             <TextView
                 fontpath="fonts/Roboto-Bold.ttf"
@@ -106,7 +112,7 @@
                     />
 
                 <TextView
-                    fontpath="fonts/Roboto-Bold.ttf"
+                    fontpath="fonts/Roboto-Regular.ttf"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="handle"
@@ -114,24 +120,25 @@
                     android:layout_below="@+id/tv_username"
                     android:layout_centerInParent="true"
                     android:textColor="@color/black"
+                    android:textSize="12sp"
                     android:alpha="0.54"/>
 
             </RelativeLayout>
 
             <Button
+                fontPath="fonts/Roboto-Bold.ttf"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:id="@+id/follow_btn"
                 android:text="FOLLOW"
+                android:textSize="12sp"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentBottom="true"
                 android:layout_margin="8dp"
                 android:minHeight="20dp"
-                android:textColor="@color/white"
-                android:background="@drawable/button_background"
+                android:textColor="@color/grey"
+                android:background="@drawable/follow_unselected_background"
                 android:layout_centerVertical="true"/>
-
-
 
         </RelativeLayout>
 
@@ -152,12 +159,8 @@
             android:layout_marginBottom="25dp"
             android:layout_marginLeft="16dp"
             android:layout_alignBottom="@+id/rl_user_view"
+            android:background="@drawable/circular_image_background"
             />
-
-
-
-
-
 
     </RelativeLayout>
 

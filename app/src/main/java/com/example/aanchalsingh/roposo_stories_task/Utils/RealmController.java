@@ -2,6 +2,8 @@ package com.example.aanchalsingh.roposo_stories_task.Utils;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.util.Log;
+
 import com.example.aanchalsingh.roposo_stories_task.DatabaseModels.User;
 import com.example.aanchalsingh.roposo_stories_task.NetworkModels.Users;
 import java.util.List;
@@ -109,4 +111,3 @@ public class RealmController {
         return realm.where(User.class).equalTo("id", id).findFirst();
     }
 }
-

@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    tools:ignore="MissingPrefix">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/black">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/iv_user_image"
+                android:layout_alignParentRight="true">
+
+                <TextView
+                    fontPath="fonts/Roboto-Bold.ttf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Username"
+                    android:layout_marginBottom="10dp"
+                    android:id="@+id/tv_user_name"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="16dp"
+                    />
+
+                <TextView
+                    fontPath="fonts/Roboto-Medium.ttf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_user_about"
+                    android:layout_below="@+id/tv_user_name"
+                    android:text="about"
+                    android:layout_marginBottom="10dp"
+                    android:textSize="14sp"
+                    android:layout_marginLeft="16dp"
+                    android:textColor="@color/white"/>
+
+                <TextView
+                    fontPath="fonts/Roboto-Light.ttf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_followers"
+                    android:layout_below="@+id/tv_user_about"
+                    android:text="followers: 50"
+                    android:textSize="12sp"
+                    android:textColor="@color/white"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginBottom="10dp"/>
+
+                <Button
+                    android:id="@+id/btn_follow"
+                    fontPath="fonts/Roboto-Bold.ttf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:layout_below="@+id/tv_followers"
+                    android:text="FOLLOW"
+                    android:textSize="12sp"
+                    android:minHeight="20dp"
+                    android:textColor="@color/white"
+                    android:layout_margin="16dp"
+                    android:background="@drawable/follow_unselected_detail_background"
+                    />
+
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:id="@+id/iv_user_image"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_margin="16dp"
+                android:background="@drawable/circular_image_background"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/commonBackground">
+
+            <TextView
+                fontPath="fonts/Roboto-Bold.ttf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="title"
+                android:id="@+id/tv_story_title"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:textSize="20sp"
+                android:textColor="@color/white"
+                />
+            <TextView
+                fontPath="fonts/Roboto-Medium.ttf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_description"
+                android:layout_below="@+id/tv_verb"
+                android:text="description"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="16dp"
+                android:textColor="@color/white"
+                android:textSize="14sp"/>
+
+            <TextView
+                fontPath="fonts/Roboto-Light.ttf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_verb"
+                android:layout_marginLeft="16dp"
+                android:layout_marginBottom="16dp"
+                android:layout_marginRight="16dp"
+                android:text="verb"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:layout_below="@+id/tv_story_title"/>
+
+            <com.example.aanchalsingh.roposo_stories_task.Utils.CustomAllroundedImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/iv_story_image"
+                android:layout_below="@+id/tv_description"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="8dp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:background="@color/commonBackground"
+
+                />
+
+        </RelativeLayout>
+    </LinearLayout>
+</ScrollView>

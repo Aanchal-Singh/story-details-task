@@ -2,7 +2,11 @@ package com.example.aanchalsingh.roposo_stories_task.Adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.Build;
+import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
@@ -13,9 +17,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
+import com.example.aanchalsingh.roposo_stories_task.Activities.StoryDetailActivity;
 import com.example.aanchalsingh.roposo_stories_task.DatabaseModels.User;
 import com.example.aanchalsingh.roposo_stories_task.NetworkModels.Story;
 import com.example.aanchalsingh.roposo_stories_task.R;
@@ -47,24 +53,24 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.MyViewHolder
         return new MyViewHolder(rowView);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
         final Story storyData = storyList.get(position);
         final User user = RealmController.with((Activity)context).getUserDetails(storyData.getDb());
         holder.storyTitle.setText(storyData.getTitle());
-
         Glide.with(context).load(user.getImage())
                 .asBitmap()
                 .centerCrop()
                 .into(new BitmapImageViewTarget(holder.userImage) {
-            @Override
-            protected void setResource(Bitmap resource) {
-                RoundedBitmapDrawable circularBitmapDrawable =
-                        RoundedBitmapDrawableFactory.create(context.getResources(), resource);
-                circularBitmapDrawable.setCircular(true);
-                holder.userImage.setImageDrawable(circularBitmapDrawable);
-            }
-        });
+                    @Override
+                    protected void setResource(Bitmap resource) {
+                        RoundedBitmapDrawable circularBitmapDrawable =
+                                RoundedBitmapDrawableFactory.create(context.getResources(), resource);
+                        circularBitmapDrawable.setCircular(true);
+                        holder.userImage.setImageDrawable(circularBitmapDrawable);
+                    }
+                });
 
         holder.userName.setText(user.getUsername());
         holder.userHandle.setText(user.getHandle());
@@ -75,12 +81,26 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.MyViewHolder
                 .asBitmap()
                 .fitCenter()
                 .override(700,500)
-                .into(holder.storyImage);
+                .into(new BitmapImageViewTarget(holder.storyImage) {
+                    @Override
+                    protected void setResource(Bitmap resource) {
+                        RoundedBitmapDrawable circularBitmapDrawable =
+                                RoundedBitmapDrawableFactory.create(context.getResources(), resource);
+                        circularBitmapDrawable.setCircular(false);
+                        holder.storyImage.setImageDrawable(circularBitmapDrawable);
+                    }
+                });
+
         if(user.getIsFollowing())
         {
             holder.follow.setTextColor(ContextCompat.getColor(context,R.color.white));
+            holder.follow.setBackground(ContextCompat.getDrawable(context,R.drawable.follow_selected_background));
+            holder.follow.setText("FOLLOWING");
         }else{
-            holder.follow.setTextColor(ContextCompat.getColor(context,R.color.colorAccent));
+            holder.follow.setTextColor(ContextCompat.getColor(context,R.color.grey));
+            holder.follow.setBackground(ContextCompat.getDrawable(context,R.drawable.follow_unselected_background));
+            holder.follow.setText("FOLLOW");
+
         }
         holder.follow.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,12 +110,25 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.MyViewHolder
             }
         });
 
+        holder.rlStory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent openStory = new Intent(context, StoryDetailActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("storyTitle",storyData.getTitle());
+                bundle.putString("storyDescription",storyData.getDescription());
+                bundle.putString("storyImage",storyData.getSi());
+                bundle.putString("storyVerb",storyData.getVerb());
+                bundle.putString("storyAuthorId",storyData.getDb());
+                openStory.putExtras(bundle);
+                context.startActivity(openStory);
+            }
+        });
+
     }
 
     @Override
     public int getItemCount() {
-        Log.wtf("size",""+storyList.size()+"");
-
         return storyList.size();
     }
 
@@ -117,6 +150,8 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.MyViewHolder
         TextView likes;
         @BindView(R.id.follow_btn)
         Button follow;
+        @BindView(R.id.story_view)
+        RelativeLayout rlStory;
 
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -128,7 +163,6 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.MyViewHolder
     public void refreshView(List<Story> freshList)
     {
         storyList=new ArrayList<>();
-        storyList.clear();
         storyList.addAll(freshList);
         notifyDataSetChanged();
     }
