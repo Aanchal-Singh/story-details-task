@@ -2,6 +2,7 @@ package com.example.aanchalsingh.roposo_stories_task.Activities;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.support.v4.content.ContextCompat;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import com.example.aanchalsingh.roposo_stories_task.AppEvents.JsonParsedEvent;
 import com.example.aanchalsingh.roposo_stories_task.Manager.JSONReader;
 import com.example.aanchalsingh.roposo_stories_task.NetworkModels.Story;
 import com.example.aanchalsingh.roposo_stories_task.R;
+import com.example.aanchalsingh.roposo_stories_task.Utils.AppConstants;
 import com.example.aanchalsingh.roposo_stories_task.Utils.RealmController;
 import com.example.aanchalsingh.roposo_stories_task.Utils.SingletonBus;
 import com.squareup.otto.Subscribe;
@@ -85,6 +87,16 @@ public class StoriesActivity extends Activity {
 
         } else {
             Toast.makeText(this,"Failed to parse data",Toast.LENGTH_LONG).show();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == AppConstants.REQUEST_CODE) {
+            if(resultCode == RESULT_OK){
+                storyAdapter.RebindCorrespondingViews(data.getStringExtra("userId"));
+            }
         }
     }
 }

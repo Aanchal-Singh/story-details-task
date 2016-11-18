@@ -25,6 +25,7 @@ import com.example.aanchalsingh.roposo_stories_task.Activities.StoryDetailActivi
 import com.example.aanchalsingh.roposo_stories_task.DatabaseModels.User;
 import com.example.aanchalsingh.roposo_stories_task.NetworkModels.Story;
 import com.example.aanchalsingh.roposo_stories_task.R;
+import com.example.aanchalsingh.roposo_stories_task.Utils.AppConstants;
 import com.example.aanchalsingh.roposo_stories_task.Utils.RealmController;
 import java.util.ArrayList;
 import java.util.List;
@@ -121,7 +122,7 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.MyViewHolder
                 bundle.putString("storyVerb",storyData.getVerb());
                 bundle.putString("storyAuthorId",storyData.getDb());
                 openStory.putExtras(bundle);
-                context.startActivity(openStory);
+                ((Activity) context).startActivityForResult(openStory, AppConstants.REQUEST_CODE);
             }
         });
 

@@ -2,6 +2,7 @@ package com.example.aanchalsingh.roposo_stories_task.Activities;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.media.Image;
 import android.os.Build;
@@ -22,6 +23,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.example.aanchalsingh.roposo_stories_task.DatabaseModels.User;
 import com.example.aanchalsingh.roposo_stories_task.R;
+import com.example.aanchalsingh.roposo_stories_task.Utils.AppConstants;
 import com.example.aanchalsingh.roposo_stories_task.Utils.RealmController;
 
 import butterknife.BindView;
@@ -138,5 +140,14 @@ public class StoryDetailActivity extends Activity implements View.OnClickListene
                 }
                 break;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent();
+        intent.putExtra("userId",user.getId());
+        setResult(RESULT_OK, intent);
+        finish();
+        super.onBackPressed();
     }
 }
